@@ -25,6 +25,7 @@ const SNav = styled.nav`
     display: flex;
     align-items: center;
     align-self: stretch;
+    margin-right: auto; //SNav가 맨왼쪽으로 붙는다.(flexbox에서 사용할 수 있는 트릭)
 `;
 
 const SIconBox = styled.div`
