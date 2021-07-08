@@ -80,26 +80,27 @@ const Header = withRouter(({ location: { pathname } }) => (
         <SLogo />
         <SNav>
             <SIconBox>
-                <SLink to="/" current={pathname == '/'}>
-                    <MoviesIcon width="2.5rem" height="2.5rem" fill="#fff" />
+                <SLink to="/" current={pathname === '/' ? 1 : 0}>
+                    <MoviesIcon width="2.5rem" height="2.5rem" />
                     <SIconText>MOVIES</SIconText>
                 </SLink>
             </SIconBox>
             <SIconBox>
-                <SLink to="/tv" current={pathname == '/tv'}>
-                    <TvIcon width="2.5rem" height="2.5rem" fill="#fff" />
+                <SLink to="/tv" current={pathname === '/tv' ? 1 : 0}>
+                    <TvIcon width="2.5rem" height="2.5rem" />
                     <SIconText>TV</SIconText>
                 </SLink>
             </SIconBox>
         </SNav>
         <Form>
             <Input placeholder="Search Movies or TV Shows.."></Input>
-            <SLink to="/search" current={pathname == '/search'}>
+            <SLink to="/search" current={pathname === '/search' ? 1 : 0}>
                 <SearchIcon width="2rem" height="2rem" />
             </SLink>
         </Form>
     </SHeader>
 ));
+//https://stackoverflow.com/questions/49784294/warning-received-false-for-a-non-boolean-attribute-how-do-i-pass-a-boolean-f (value ? 1 : 0 으로 바꾸는거 해결부분 )
 
 export default Header;
 
