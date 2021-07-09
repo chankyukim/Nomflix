@@ -92,12 +92,16 @@ function HomeContainer() {
         fetchPopular();
     }, []);
 
+    if (nowPlaying.loading) return <div>nowPlaying loading</div>;
+    if (upcoming.loading) return <div>upcoming loading</div>;
+    if (popular.loading) return <div>popular loading</div>;
+
     const newData = { nowPlaying, upcoming, popular };
 
     return (
         <>
             {console.log(newData)}
-            <HomePresenter />
+            <HomePresenter nowPlaying={nowPlaying} upcoming={upcoming} popular={popular} />
         </>
     );
 }
