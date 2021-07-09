@@ -12,31 +12,31 @@ function HomeContainer() {
     //https://darrengwon.tistory.com/275 (왜 useEffect를 비동기로 안만들고 비동기 함수를 따로 만들어야 하는지 이유)
 
     const fetchData = async () => {
-        const {
-            data: { results: nowPlaying },
-        } = await moviesApi.nowPlaying();
-
-        const {
-            data: { results: upcoming },
-        } = await moviesApi.upcoming();
-
-        const {
-            data: { results: popular },
-        } = await moviesApi.popular();
-
-        setNowPlaying(nowPlaying);
-        setUpcoming(upcoming);
-        setPopular(popular);
-    };
-
-    useEffect(() => {
         try {
-            fetchData();
+            const {
+                data: { results: nowPlaying },
+            } = await moviesApi.nowPlaying();
+
+            const {
+                data: { results: upcoming },
+            } = await moviesApi.upcoming();
+
+            const {
+                data: { results: popular },
+            } = await moviesApi.popular();
+
+            setNowPlaying(nowPlaying);
+            setUpcoming(upcoming);
+            setPopular(popular);
         } catch {
             setError("Can't find movies information");
         } finally {
             setLoading(false);
         }
+    };
+
+    useEffect(() => {
+        fetchData();
     }, []);
 
     const newData = { nowPlaying, upcoming, popular, loading, error };
