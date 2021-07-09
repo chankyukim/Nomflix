@@ -3,13 +3,11 @@ import React, { useState, useEffect } from 'react';
 import HomePresenter from './HomePresenter';
 
 function HomeContainer() {
-    const [state, setState] = useState({
-        nowPlaying: null,
-        upcoming: null,
-        popular: null,
-        error: null,
-        loading: true,
-    });
+    const [nowPlaying, setNowPlaying] = useState();
+    const [upcoming, setUpcoming] = useState();
+    const [popular, setPopular] = useState();
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState();
 
     //https://darrengwon.tistory.com/275 (왜 useEffect를 비동기로 안만들고 비동기 함수를 따로 만들어야 하는지 이유)
 
@@ -25,33 +23,27 @@ function HomeContainer() {
         const {
             data: { results: popular },
         } = await moviesApi.popular();
-        setState({
-            ...state,
-            nowPlaying: nowPlaying,
-            upcoming: upcoming,
-            popular: popular,
-        });
+
+        setNowPlaying(nowPlaying);
+        setUpcoming(upcoming);
+        setPopular(popular);
     };
 
     useEffect(() => {
         try {
             fetchData();
         } catch {
-            setState({
-                ...state,
-                error: "Can't find movies information",
-            });
+            setError("Can't find movies information");
         } finally {
-            setState({
-                ...state,
-                loading: false,
-            });
+            setLoading(false);
         }
     }, []);
 
+    const newData = { nowPlaying, upcoming, popular, loading, error };
+
     return (
         <>
-            {console.log('state', state)}
+            {console.log(newData)}
             <HomePresenter />
         </>
     );
