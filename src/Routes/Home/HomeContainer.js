@@ -3,17 +3,17 @@ import React, { useState, useEffect } from 'react';
 import HomePresenter from './HomePresenter';
 
 function HomeContainer() {
-    const [nowPlaying, setNowPlaying] = useState({
+    const [movieNowPlaying, setMovieNowPlaying] = useState({
         nowPlaying: null,
         loading: true,
         error: null,
     });
-    const [popular, setPopular] = useState({
+    const [moviePopular, setMoviePopular] = useState({
         popular: null,
         loading: true,
         error: null,
     });
-    const [upcoming, setUpcoming] = useState({
+    const [movieUpcoming, setMovieUpcoming] = useState({
         upcoming: null,
         loading: true,
         error: null,
@@ -27,13 +27,13 @@ function HomeContainer() {
                 data: { results: nowPlaying },
             } = await moviesApi.nowPlaying();
 
-            setNowPlaying({
+            setMovieNowPlaying({
                 nowPlaying: nowPlaying,
                 loading: false,
                 error: null,
             });
         } catch {
-            setNowPlaying({
+            setMovieNowPlaying({
                 nowPlaying: null,
                 loading: false,
                 error: "Can't find movies information",
@@ -47,13 +47,13 @@ function HomeContainer() {
                 data: { results: popular },
             } = await moviesApi.popular();
 
-            setPopular({
+            setMoviePopular({
                 popular: popular,
                 loading: false,
                 error: null,
             });
         } catch {
-            setPopular({
+            setMoviePopular({
                 popular: null,
                 loading: false,
                 error: "Can't find movies information",
@@ -66,13 +66,13 @@ function HomeContainer() {
                 data: { results: upcoming },
             } = await moviesApi.upcoming();
 
-            setUpcoming({
+            setMovieUpcoming({
                 upcoming: upcoming,
                 loading: false,
                 error: null,
             });
         } catch {
-            setUpcoming({
+            setMovieUpcoming({
                 upcoming: null,
                 loading: false,
                 error: "Can't find movies information",
@@ -92,16 +92,20 @@ function HomeContainer() {
         fetchPopular();
     }, []);
 
-    if (nowPlaying.loading) return <div>nowPlaying loading</div>;
-    if (upcoming.loading) return <div>upcoming loading</div>;
-    if (popular.loading) return <div>popular loading</div>;
+    // if (nowPlaying.loading) return <div>nowPlaying loading</div>;
+    // if (upcoming.loading) return <div>upcoming loading</div>;
+    // if (popular.loading) return <div>popular loading</div>;
 
-    const newData = { nowPlaying, upcoming, popular };
+    const newData = { movieNowPlaying, movieUpcoming, moviePopular };
 
     return (
         <>
-            {console.log(newData)}
-            <HomePresenter nowPlaying={nowPlaying} upcoming={upcoming} popular={popular} />
+            {/* {console.log(newData)} */}
+            <HomePresenter
+                movieNowPlaying={movieNowPlaying}
+                movieUpcoming={movieUpcoming}
+                moviePopular={moviePopular}
+            />
         </>
     );
 }
