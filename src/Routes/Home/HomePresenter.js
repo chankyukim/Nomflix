@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Section from 'Components/Section';
+import Loader from 'Components/Loader';
 
 const Container = styled.div`
     padding: 20px 20px;
@@ -15,7 +16,9 @@ function HomePresenter({ movieNowPlaying, moviePopular, movieUpcoming }) {
     const { loading: popularLoading } = moviePopular;
     const { loading: upcomingLoading } = movieUpcoming;
 
-    return nowPlayingLoading && popularLoading && upcomingLoading ? null : (
+    return nowPlayingLoading && popularLoading && upcomingLoading ? (
+        <Loader />
+    ) : (
         <Container>
             {nowPlaying && nowPlaying.length > 0 && (
                 <Section title="Now Playing">{nowPlaying.map(movie => movie.title)}</Section>
