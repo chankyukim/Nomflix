@@ -19,52 +19,12 @@ function HomeContainer() {
         error: null,
     });
 
-    //https://darrengwon.tistory.com/275 (왜 useEffect를 비동기로 안만들고 비동기 함수를 따로 만들어야 하는지 이유)
-
-    const fetchNowPlaying = async () => {
-        try {
-            const {
-                data: { results: nowPlaying },
-            } = await moviesApi.nowPlaying();
-
-            setMovieNowPlaying({
-                nowPlaying: nowPlaying,
-                loading: false,
-                error: null,
-            });
-        } catch {
-            setMovieNowPlaying({
-                nowPlaying: null,
-                loading: false,
-                error: "Can't find movies information",
-            });
-        }
-    };
-
-    const fetchPopular = async () => {
-        try {
-            const {
-                data: { results: popular },
-            } = await moviesApi.popular();
-
-            setMoviePopular({
-                popular: popular,
-                loading: false,
-                error: null,
-            });
-        } catch {
-            setMoviePopular({
-                popular: null,
-                loading: false,
-                error: "Can't find movies information",
-            });
-        }
-    };
     const fetchUpcoming = async () => {
         try {
             const {
                 data: { results: upcoming },
             } = await moviesApi.upcoming();
+            // throw Error();
 
             setMovieUpcoming({
                 upcoming: upcoming,
@@ -75,14 +35,54 @@ function HomeContainer() {
             setMovieUpcoming({
                 upcoming: null,
                 loading: false,
-                error: "Can't find movies information",
+                error: "Can't find upcoming movies information",
             });
         }
     };
 
-    useEffect(() => {
-        fetchNowPlaying();
-    }, []);
+    //https://darrengwon.tistory.com/275 (왜 useEffect를 비동기로 안만들고 비동기 함수를 따로 만들어야 하는지 이유)
+
+    const fetchPopular = async () => {
+        try {
+            const {
+                data: { results: popular },
+            } = await moviesApi.popular();
+            // throw Error();
+
+            setMoviePopular({
+                popular: popular,
+                loading: false,
+                error: null,
+            });
+        } catch {
+            setMoviePopular({
+                popular: null,
+                loading: false,
+                error: "Can't find popular movies information",
+            });
+        }
+    };
+
+    const fetchNowPlaying = async () => {
+        try {
+            const {
+                data: { results: nowPlaying },
+            } = await moviesApi.nowPlaying();
+            // throw Error();
+
+            setMovieNowPlaying({
+                nowPlaying: nowPlaying,
+                loading: false,
+                error: null,
+            });
+        } catch {
+            setMovieNowPlaying({
+                nowPlaying: null,
+                loading: false,
+                error: "Can't find now playing movies information",
+            });
+        }
+    };
 
     useEffect(() => {
         fetchUpcoming();
@@ -90,6 +90,10 @@ function HomeContainer() {
 
     useEffect(() => {
         fetchPopular();
+    }, []);
+
+    useEffect(() => {
+        fetchNowPlaying();
     }, []);
 
     // if (nowPlaying.loading) return <div>nowPlaying loading</div>;
@@ -102,9 +106,9 @@ function HomeContainer() {
         <>
             {/* {console.log(newData)} */}
             <HomePresenter
-                movieNowPlaying={movieNowPlaying}
                 movieUpcoming={movieUpcoming}
                 moviePopular={moviePopular}
+                movieNowPlaying={movieNowPlaying}
             />
         </>
     );
