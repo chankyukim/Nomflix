@@ -42,8 +42,8 @@ const SLink = styled(Link)`
     flex-direction: column;
 
     & > * {
-        fill: ${props => (props.current ? 'red' : '#fff')};
-        color: ${props => (props.current ? 'red' : '#fff')};
+        fill: ${props => (props.current ? '#d63031' : '#fff')};
+        color: ${props => (props.current ? '#d63031' : '#fff')};
         transition: all 0.3s ease-out;
     }
 `;
