@@ -80,7 +80,7 @@ const Header = withRouter(({ location: { pathname } }) => (
         <SLogo />
         <SNav>
             <SIconBox>
-                <SLink to="/" current={pathname === '/' ? 1 : 0}>
+                <SLink to="/movies" current={pathname === '/movies' ? 1 : 0}>
                     <MoviesIcon width="2.5rem" height="2.5rem" />
                     <SIconText>MOVIES</SIconText>
                 </SLink>

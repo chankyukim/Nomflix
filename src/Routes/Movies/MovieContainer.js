@@ -1,8 +1,8 @@
 import { moviesApi } from 'api';
 import React, { useState, useEffect } from 'react';
-import HomePresenter from './HomePresenter';
+import MoviePresenter from './MoviePresenter';
 
-function HomeContainer() {
+function MovieContainer() {
     const [movieNowPlaying, setMovieNowPlaying] = useState({
         nowPlaying: null,
         loading: true,
@@ -105,7 +105,7 @@ function HomeContainer() {
     return (
         <>
             {/* {console.log(newData)} */}
-            <HomePresenter
+            <MoviePresenter
                 movieUpcoming={movieUpcoming}
                 moviePopular={moviePopular}
                 movieNowPlaying={movieNowPlaying}
@@ -114,4 +114,4 @@ function HomeContainer() {
     );
 }
 
-export default HomeContainer;
+export default MovieContainer;

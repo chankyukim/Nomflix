@@ -10,7 +10,7 @@ const Container = styled.div`
     padding: 20px 20px;
 `;
 
-function HomePresenter({ movieUpcoming, moviePopular, movieNowPlaying }) {
+function MoviePresenter({ movieUpcoming, moviePopular, movieNowPlaying }) {
     const { upcoming } = movieUpcoming;
     const { popular } = moviePopular;
     const { nowPlaying } = movieNowPlaying;
@@ -95,10 +95,10 @@ function HomePresenter({ movieUpcoming, moviePopular, movieNowPlaying }) {
     );
 }
 
-HomePresenter.propTypes = {
+MoviePresenter.propTypes = {
     movieUpcoming: PropTypes.object,
     moviePopular: PropTypes.object,
     movieNowPlaying: PropTypes.object,
 };
 
-export default HomePresenter;
+export default MoviePresenter;
