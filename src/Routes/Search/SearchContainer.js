@@ -2,9 +2,9 @@ import { moviesApi, tvApi } from 'api';
 import React from 'react';
 import SearchPresenter from './SearchPresenter';
 
-export default class extends React.Component {
+class SearchContainer extends React.Component {
     state = {
-        movieResult: null,
+        movieResults: null,
         tvResults: null,
         searchTerm: '',
         loading: false,
@@ -12,12 +12,23 @@ export default class extends React.Component {
     };
 
     //폼에서 텍스트를 입력하고 엔터를 누르는게 handleSubmit이다.
-    handleSubmit = () => {
+    handleSubmit = e => {
+        e.preventDefault();
         const { searchTerm } = this.state;
         // console.log(searchTerm);
         if (searchTerm !== '') {
             this.searchByTerm();
         }
+    };
+
+    updateTerm = e => {
+        const {
+            target: { value },
+        } = e;
+        // console.log(value);
+        this.setState({
+            searchTerm: value,
+        });
     };
 
     searchByTerm = async () => {
@@ -30,16 +41,16 @@ export default class extends React.Component {
 
         try {
             const {
-                data: { results: movieResult },
+                data: { results: movieResults },
             } = await moviesApi.search(searchTerm);
 
             const {
-                data: { results: tvResult },
+                data: { results: tvResults },
             } = await tvApi.search(searchTerm);
 
             this.setState({
-                movieResult,
-                tvResult,
+                movieResults,
+                tvResults,
             });
         } catch {
             this.setState({
@@ -53,10 +64,22 @@ export default class extends React.Component {
     };
 
     render() {
-        const { movieResult, tvResults, searchTerm, loading, error } = this.state;
-        {
-            console.log(this.state);
-        }
-        return <SearchPresenter movieResult={movieResult} tvResults={tvResults} searchTerm={searchTerm} loading={loading} error={error} handleSubmit={this.handleSubmit} />;
+        const { movieResults, tvResults, searchTerm, loading, error } = this.state;
+        // {
+        //     console.log(this.state);
+        // }
+        return (
+            <SearchPresenter
+                movieResults={movieResults}
+                tvResults={tvResults}
+                searchTerm={searchTerm}
+                loading={loading}
+                error={error}
+                handleSubmit={this.handleSubmit}
+                updateTerm={this.updateTerm}
+            />
+        );
     }
 }
+
+export default SearchContainer;

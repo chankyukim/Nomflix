@@ -1,10 +1,12 @@
 import axios from 'axios';
 
+//https://hoyeonkim795.github.io/posts/rest_api/ (참고)
+
 const api = axios.create({
     baseURL: 'https://api.themoviedb.org/3/',
     params: {
         api_key: '7ebf43aaadd09592695aa36c51f5e0d1',
-        language: 'ko-KR',
+        language: 'en-US',
     },
 });
 
