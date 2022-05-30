@@ -6,21 +6,22 @@ import TV from 'Routes/TV';
 import Header from 'Components/Header';
 import Detail from 'Routes/Detail';
 
-export default () => (
-    <Router>
-        <Header />
-        <Switch>
-            <Route path="/" exact component={Home}></Route>
-            <Route path="/tv" exact component={TV}></Route>
-            <Route path="/search" component={Search}></Route>
-            <Route path="/movie/:id" component={Detail}></Route>
-            <Route path="/show/:id" component={Detail}></Route>
-            {/* <Route path="/search/popular" render={() => <h1>popular</h1>}></Route> */}
-            <Redirect from="*" to="/" />
-        </Switch>
-    </Router>
+const RouterComponent = () => (
+  <Router>
+    <Header />
+    <Switch>
+      <Route path="/" exact component={Home}></Route>
+      <Route path="/tv" exact component={TV}></Route>
+      <Route path="/search" component={Search}></Route>
+      <Route path="/movie/:id" component={Detail}></Route>
+      <Route path="/show/:id" component={Detail}></Route>
+      {/* <Route path="/search/popular" render={() => <h1>popular</h1>}></Route> */}
+      <Redirect from="*" to="/" />
+    </Switch>
+  </Router>
 );
 
+export default RouterComponent;
 /* path는 어느 url에서 해당 Route를 render할 지 알려준다. component는 누군가 이 Route에 왔을 때 어떤 컴포넌트가 보여질 건지에 대한것이다. */
 
 /* Router밖에서는 Route를 할 수 없다. 
